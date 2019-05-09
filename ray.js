@@ -1,13 +1,17 @@
 class Ray {
-    constructor(x1, y1, x2, y2) {
-        this.pos = createVector(x1, y1);
-        this.dir = createVector(x2, y2);
+    constructor(pos, angle) {
+        this.pos = pos;
+        this.dir = p5.Vector.fromAngle(angle);
     }
 
     lookAt(x, y) {
         this.dir.x = x - this.pos.x;
         this.dir.y = y - this.pos.y;
         this.dir.normalize();
+    }
+
+    setPos(pos) {
+        this.pos = pos;
     }
 
     cast(wall) {
@@ -29,17 +33,18 @@ class Ray {
         const u = - ( (x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3) ) / den;
 
         if(t >= 0 && t <= 1 && u >= 0) {
-            return createVector(
-                x1 + t * (x2 - x1),
-                y1 + t * (y2 - y1)
-            );
+            return {
+                'x': x1 + t * (x2 - x1),
+                'y': y1 + t * (y2 - y1),
+                'u': u
+            };
         } else {
             return;
         }
     }
 
     show() {
-        stroke(255, 0, 0);
+        stroke(255, 0, 0, 100);
         push();
         translate(this.pos.x, this.pos.y);
         line(0, 0, this.dir.x * 10, this.dir.y * 10);

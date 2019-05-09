@@ -3,7 +3,7 @@
 
 let walls = [];
 const walls_count = 5;
-let ray;
+let particle;
 
 function setup() {
     createCanvas(400, 400);
@@ -18,22 +18,17 @@ function setup() {
         wall_start_x = wall_end_x;
         wall_start_y = wall_end_y;
     }
-    ray = new Ray( 100, 200, 1, 0);
+    particle = new Particle();
 }
 
 function draw() {
     background(0);
 
-    ray.lookAt(mouseX, mouseY);
-    ray.show();
+    particle.setPos(createVector(mouseX, mouseY));
+    particle.show();
+    particle.look(walls);
 
     for(let wall of walls) {
         wall.show();
-        let pt = ray.cast(wall);
-        if(pt) {
-            stroke(255);
-            noFill();
-            ellipse(pt.x, pt.y, 8, 8);
-        }
     }
 }
