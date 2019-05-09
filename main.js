@@ -4,9 +4,13 @@
 let walls = [];
 const walls_count = 5;
 let particle;
+let noise_off;
 
 function setup() {
     createCanvas(400, 400);
+
+    noise_off = createVector(random()*1000, random()*1000);
+
     let wall_start_x = random(width);
     let wall_start_y = random(height);
     for(let i=0; i<walls_count; i++) {
@@ -24,11 +28,13 @@ function setup() {
 function draw() {
     background(0);
 
-    particle.setPos(createVector(mouseX, mouseY));
+    particle.setPos(createVector(noise(noise_off.x)*width, noise(noise_off.y)*height));
     particle.show();
     particle.look(walls);
 
     for(let wall of walls) {
         wall.show();
     }
+
+    noise_off.add(0.01, 0.01);
 }
