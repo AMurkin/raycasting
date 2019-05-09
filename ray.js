@@ -10,11 +10,11 @@ class Ray {
         this.dir.normalize();
     }
 
-    cast(b) {
-        const x1 = b.a.x;
-        const y1 = b.a.y;
-        const x2 = b.b.x;
-        const y2 = b.b.y;
+    cast(wall) {
+        const x1 = wall.a.x;
+        const y1 = wall.a.y;
+        const x2 = wall.b.x;
+        const y2 = wall.b.y;
 
         const x3 = this.pos.x;
         const y3 = this.pos.y;
