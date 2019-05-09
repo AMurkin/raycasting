@@ -19,8 +19,14 @@ function setup() {
         
         walls[i] = new Boundary(wall_start_x, wall_start_y, wall_end_x, wall_end_y);
         
-        wall_start_x = wall_end_x;
-        wall_start_y = wall_end_y;
+        if(random()<0.75) {
+            wall_start_x = wall_end_x;
+            wall_start_y = wall_end_y;
+        } else {
+            // 25% chance to start a new wall segment
+            wall_start_x = random(width);
+            wall_start_y = random(height);
+        }
     }
     particle = new Particle();
 }
